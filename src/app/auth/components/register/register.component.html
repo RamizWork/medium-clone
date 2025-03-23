@@ -11,7 +11,7 @@
                     <fieldset>
                         <fieldset class="form-group">
                             <input type="text" class="form-control form-control-lg" placeholder="UserName"
-                                formControlName="userName">
+                                formControlName="username">
                         </fieldset>
                         <fieldset class="form-group">
                             <input type="text" class="form-control form-control-lg" placeholder="Email"
@@ -21,7 +21,7 @@
                             <input type="text" class="form-control form-control-lg" placeholder="Password"
                                 formControlName="password">
                         </fieldset>
-                        <button class="btn btn-lg btn-primary pull-xs-right" type="submit">Sing up</button>
+                        <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="isSubmitting$ | async" type="submit">Sing up</button>
                     </fieldset>
                 </form>
             </div>

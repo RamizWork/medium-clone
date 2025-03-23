@@ -1,7 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+
 import {registerAction} from '../../store/actions/register.action';
+import {isSubmittingSelector} from '../../store/selectors';
+import {AppStateInterface} from '../../../shared/types/appState.interface';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'mc-register',
@@ -9,23 +14,30 @@ import {registerAction} from '../../store/actions/register.action';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  private _authService: AuthService = inject(AuthService);
   private _fb: FormBuilder = inject(FormBuilder);
-  private _store: Store = inject(Store);
+  private _store: Store = inject(Store<AppStateInterface>);
 
   public form: FormGroup;
 
+  public isSubmitting$: Observable<boolean>;
+
   ngOnInit(): void {
     this.initializeForm();
+    this.initializeValue();
+  }
+
+  private initializeValue(): void {
+    this.isSubmitting$ = this._store.pipe(select(isSubmittingSelector));
   }
 
   public onSubmit(): void {
     this._store.dispatch(registerAction(this.form.value));
-    console.log(this.form.value);
   }
 
   private initializeForm(): void {
     this.form = this._fb.group({
-      userName: ['', Validators.required],
+      username: ['', Validators.required],
       email: '',
       password: '',
     });
