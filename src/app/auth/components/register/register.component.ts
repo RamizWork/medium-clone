@@ -7,6 +7,7 @@ import {registerAction} from '../../store/actions/register.action';
 import {isSubmittingSelector} from '../../store/selectors';
 import {AppStateInterface} from '../../../shared/types/appState.interface';
 import {AuthService} from '../../services/auth.service';
+import {RegisterRequestInterface} from '../../types/registerRequest.interface';
 
 @Component({
   selector: 'mc-register',
@@ -32,7 +33,11 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this._store.dispatch(registerAction(this.form.value));
+    const request: RegisterRequestInterface = {
+      user: this.form.value,
+    };
+
+    this._store.dispatch(registerAction({request}));
   }
 
   private initializeForm(): void {

@@ -13,7 +13,7 @@ export class AuthService {
 
   public register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
     return this._http
-      .post<AuthResponseInterface>(environments.apiUrl + '/users', {user: data})
+      .post<AuthResponseInterface>(environments.apiUrl + '/users', data)
       .pipe(map((res: AuthResponseInterface) => res.user));
   }
 }
