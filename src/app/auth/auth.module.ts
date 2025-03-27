@@ -10,7 +10,7 @@ import {AuthRoutingModule} from './auth-routing.module';
 import {AuthLayoutComponent} from './components/auth-layout.component';
 import {authReducer} from './store/redusers';
 import {AuthService} from './services/auth.service';
-import {RegisterEffect} from './store/effects/register.effect';
+import {RegisterEffect } from './store/effects/register.effect';
 
 @NgModule({
   declarations: [AuthLayoutComponent, RegisterComponent],
